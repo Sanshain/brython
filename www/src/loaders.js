@@ -408,11 +408,10 @@ var loop = $B.loop = function(){
 
     if(func == "execute"){
         let script = task[1],
-            script_id = script.__name__.replace(/\./g, "_"),
             module = $B.module.$factory(script.__name__)
         module.__file__ = script.__file__
         module.__doc__ = script.__doc__
-        $B.imported[script_id] = module
+        $B.imported[script.__name__] = module
         try{
             var modobj = new Function(script.js + `\nreturn locals`)()
             for(var key in modobj){
